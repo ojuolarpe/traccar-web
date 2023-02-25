@@ -1,8 +1,6 @@
 import React from 'react';
-import { useMediaQuery, Paper } from '@mui/material';
+import { Paper } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
-import { useTheme } from '@mui/material/styles';
-import LogoImage from './LogoImage';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,6 +11,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundImage: 'url(./login-bg.jpg)',
+    objectFit: 'cover',
     background: theme.palette.primary.main,
     paddingBottom: theme.spacing(5),
     width: theme.dimensions.sidebarWidth,
@@ -43,13 +43,10 @@ const useStyles = makeStyles((theme) => ({
 
 const LoginLayout = ({ children }) => {
   const classes = useStyles();
-  const theme = useTheme();
 
   return (
     <main className={classes.root}>
-      <div className={classes.sidebar}>
-        {!useMediaQuery(theme.breakpoints.down('lg')) && <LogoImage color={theme.palette.secondary.contrastText} />}
-      </div>
+      <div className={classes.sidebar} />
       <Paper className={classes.paper}>
         <form className={classes.form}>
           {children}

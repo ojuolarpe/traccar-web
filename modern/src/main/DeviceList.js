@@ -7,13 +7,12 @@ import { devicesActions } from '../store';
 import { useEffectAsync } from '../reactHelper';
 import DeviceRow from './DeviceRow';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   list: {
     maxHeight: '100%',
   },
   listInner: {
     position: 'relative',
-    margin: theme.spacing(1.5, 0),
   },
 }));
 

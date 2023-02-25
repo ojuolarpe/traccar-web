@@ -24,8 +24,8 @@ import { useAttributePreference } from '../common/util/preferences';
 
 const useStyles = makeStyles((theme) => ({
   icon: {
-    width: '25px',
-    height: '25px',
+    width: '15px',
+    height: '15px',
     filter: 'brightness(0) invert(1)',
   },
   batteryText: {
@@ -44,6 +44,19 @@ const useStyles = makeStyles((theme) => ({
   },
   neutral: {
     color: theme.palette.colors.neutral,
+  },
+  dot: {
+    height: '10px',
+    width: '10px',
+    backgroundColor: 'red',
+    borderRadius: '50%',
+    display: 'inline-block',
+    padding: '3px',
+    border: '0.5px solid silver',
+  },
+  avatarList: {
+    margin: '3px',
+    minWidth: '30px',
   },
 }));
 
@@ -92,11 +105,12 @@ const DeviceRow = ({ data, index, style }) => {
     <div style={style}>
       <ListItemButton
         key={item.id}
-        onClick={() => dispatch(devicesActions.select(item.id))}
+        onClick={() => dispatch(devicesActions.selectId(item.id))}
         disabled={!admin && item.disabled}
+        disablePadding
       >
-        <ListItemAvatar>
-          <Avatar>
+        <ListItemAvatar className={classes.avatarList}>
+          <Avatar sx={{ width: 24, height: 24 }}>
             <img className={classes.icon} src={mapIcons[mapIconKey(item.category)]} alt="" />
           </Avatar>
         </ListItemAvatar>
@@ -108,6 +122,9 @@ const DeviceRow = ({ data, index, style }) => {
         />
         {position && (
           <>
+            {position.attributes.hasOwnProperty('color') && (
+              <span className={classes.dot} style={{ backgroundColor: position.attributes.color }} title={position.attributes.hasOwnProperty('status') ? position.attributes.status : 'Device Color'} />
+            )}
             {position.attributes.hasOwnProperty('alarm') && (
               <Tooltip title={`${t('eventAlarm')}: ${formatAlarm(position.attributes.alarm, t)}`}>
                 <IconButton size="small">
