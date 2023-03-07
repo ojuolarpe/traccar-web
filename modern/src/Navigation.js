@@ -49,6 +49,7 @@ import App from './App';
 import ChangeServerPage from './other/ChangeServerPage';
 import DevicesPage from './settings/DevicesPage';
 import ScheduledPage from './reports/ScheduledPage';
+import DashboardPage from './dashboard/DashboardPage';
 
 const Navigation = () => {
   const navigate = useNavigate();
@@ -101,6 +102,7 @@ const Navigation = () => {
         <Route path="event/:id" element={<EventPage />} />
         <Route path="replay" element={<ReplayPage />} />
         <Route path="geofences" element={<GeofencesPage />} />
+        <Route path="dashboard" element={<DashboardPage />} />
 
         <Route path="settings">
           <Route path="accumulators/:deviceId" element={<AccumulatorsPage />} />

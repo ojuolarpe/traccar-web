@@ -107,7 +107,6 @@ const DeviceRow = ({ data, index, style }) => {
         key={item.id}
         onClick={() => dispatch(devicesActions.selectId(item.id))}
         disabled={!admin && item.disabled}
-        disablePadding
       >
         <ListItemAvatar className={classes.avatarList}>
           <Avatar sx={{ width: 24, height: 24 }}>

@@ -33,4 +33,9 @@ export default {
       },
     },
   },
+  MuiListItem: {
+    defaultProps: {
+      dense: true,
+    },
+  },
 };
