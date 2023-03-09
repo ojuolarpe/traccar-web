@@ -1,35 +1,24 @@
 import React from 'react';
 import {
-  Divider, List, ListItemButton, ListItemIcon, ListItemText,
+  Box,
+  Button,
 } from '@mui/material';
 import SettingsIcon from '@mui/icons-material/Settings';
 import MapIcon from '@mui/icons-material/Map';
-import CreateIcon from '@mui/icons-material/Create';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import FolderIcon from '@mui/icons-material/Folder';
-import PersonIcon from '@mui/icons-material/Person';
-import StorageIcon from '@mui/icons-material/Storage';
-import BuildIcon from '@mui/icons-material/Build';
-import PeopleIcon from '@mui/icons-material/People';
-import TodayIcon from '@mui/icons-material/Today';
-import PublishIcon from '@mui/icons-material/Publish';
 import DescriptionIcon from '@mui/icons-material/Description';
-import SmartphoneIcon from '@mui/icons-material/Smartphone';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTranslation } from '../../common/components/LocalizationProvider';
 import {
-  useAdministrator, useDeviceReadonly, useManager, useRestriction,
+  useRestriction,
 } from '../../common/util/permissions';
-import useFeatures from '../../common/util/useFeatures';
 
 const MenuItem = ({
-  title, link, icon, selected,
+  title, link, icon,
 }) => (
-  <ListItemButton key={link} component={Link} to={link} selected={selected}>
-    <ListItemIcon>{icon}</ListItemIcon>
-    <ListItemText primary={title} />
-  </ListItemButton>
+  <Button href={link} startIcon={icon}>
+    {title}
+  </Button>
 );
 
 const DashboardMenu = () => {
@@ -38,16 +27,11 @@ const DashboardMenu = () => {
 
   const readonly = useRestriction('readonly');
   const disableReports = useRestriction('disableReports');
-  const deviceReadonly = useDeviceReadonly();
-  const admin = useAdministrator();
-  const manager = useManager();
-  const userId = useSelector((state) => state.session.user.id);
   const socket = useSelector((state) => state.session.socket);
 
- 
-
   return (
-    <List>
+    <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+      <Button>Test</Button>
       <MenuItem
         title={t('mapTitle')}
         link="/"
@@ -84,7 +68,7 @@ const DashboardMenu = () => {
           selected={location.pathname === '/reports/route'}
         />
       )}
-    </List>
+    </Box>
   );
 };
 

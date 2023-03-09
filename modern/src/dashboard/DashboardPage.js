@@ -1,11 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import {
-  Box, Container, Unstable_Grid2 as Grid, Typography, Divider, AppBar, Toolbar, Button,
+  Box, Container, Unstable_Grid2 as Grid, Typography, Divider, AppBar, Toolbar,
 } from '@mui/material';
 import DirectionsCarFilledTwoToneIcon from '@mui/icons-material/DirectionsCarFilledTwoTone';
 import StatisticsCard from './components/StatisticsCard';
 import DeviceStatusChart from './components/DeviceStatusChart';
+import DashboardMenu from './components/DashboardMenu';
 
 const DashboardPage = () => {
   const devices = Object.values(useSelector((state) => state.devices.items));
@@ -37,11 +38,10 @@ const DashboardPage = () => {
     setNeverActiveCount(devices ? devices.filter((device) => device.lastUpdate === null).length : 0);
     setDeviceStatusPieChartData([{ name: 'Online', value: ((totalOnline) / totalDevice) * 100, count: totalOnline }, { name: 'Inactive', value: ((totalUnknown) / totalDevice) * 100, count: totalUnknown }, { name: 'Offline', value: (totalOffline / totalDevice) * 100, count: totalOffline }]);
   }, [devices]);
-  const navItems = ['Home', 'About', 'Contact'];
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar component="nav">
+      <AppBar component="nav" color="primary">
         <Toolbar>
           <Typography
             variant="h5"
@@ -50,13 +50,7 @@ const DashboardPage = () => {
           >
             EFCC TELEMATICS CORE
           </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
-                {item}
-              </Button>
-            ))}
-          </Box>
+          <DashboardMenu />
         </Toolbar>
       </AppBar>
       <Box

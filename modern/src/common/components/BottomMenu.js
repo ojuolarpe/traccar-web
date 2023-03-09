@@ -2,14 +2,15 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from 'react-router-dom';
 import {
-  Paper, BottomNavigation, BottomNavigationAction, Menu, MenuItem, Typography, Badge,
+  Paper, BottomNavigation, BottomNavigationAction, Menu, MenuItem, Typography,
 } from '@mui/material';
 
 import DescriptionIcon from '@mui/icons-material/Description';
 import SettingsIcon from '@mui/icons-material/Settings';
-import MapIcon from '@mui/icons-material/Map';
+// import MapIcon from '@mui/icons-material/Map';
 import PersonIcon from '@mui/icons-material/Person';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 import { sessionActions } from '../../store';
 import { useTranslation } from './LocalizationProvider';
@@ -25,7 +26,7 @@ const BottomMenu = () => {
   const readonly = useRestriction('readonly');
   const disableReports = useRestriction('disableReports');
   const user = useSelector((state) => state.session.user);
-  const socket = useSelector((state) => state.session.socket);
+  // const socket = useSelector((state) => state.session.socket);
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -87,6 +88,9 @@ const BottomMenu = () => {
       case 'settings':
         navigate('/settings/preferences');
         break;
+      case 'dashboard':
+        navigate('/dashboard');
+        break;
       case 'account':
         setAnchorEl(event.currentTarget);
         break;
@@ -101,7 +105,7 @@ const BottomMenu = () => {
   return (
     <Paper square elevation={3}>
       <BottomNavigation value={currentSelection()} onChange={handleSelection} showLabels>
-        <BottomNavigationAction
+        {/* <BottomNavigationAction
           label={t('mapTitle')}
           icon={(
             <Badge color="error" variant="dot" overlap="circular" invisible={socket !== false}>
@@ -109,7 +113,8 @@ const BottomMenu = () => {
             </Badge>
           )}
           value="map"
-        />
+        /> */}
+        <BottomNavigationAction label="Dashboard" icon={<DashboardIcon />} value="dashboard" />
         {!disableReports && (
           <BottomNavigationAction label={t('reportTitle')} icon={<DescriptionIcon />} value="reports" />
         )}

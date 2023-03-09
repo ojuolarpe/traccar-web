@@ -35,7 +35,7 @@ const DeviceStatusChart = (props) => {
         <Card sx={sx}>
           <CardHeader title={title} />
           <CardContent>
-            <PieChart width={100%} height={300}>
+            <PieChart width={400} height={300}>
               <Pie
                 data={data}
                 color="#000000"
