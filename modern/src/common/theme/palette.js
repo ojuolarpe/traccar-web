@@ -6,7 +6,7 @@ const colors = {
   white: common.white,
   background: grey[50],
   primary: indigo[900],
-  secondary: green[500],
+  secondary: '#211B1F',
   positive: green[500],
   medium: amber[700],
   negative: red[500],

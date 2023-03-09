@@ -8,6 +8,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import logo from './efcc-logo.png';
 import { sessionActions } from '../store';
 import { useTranslation } from '../common/components/LocalizationProvider';
 import LoginLayout from './LoginLayout';
@@ -39,8 +40,24 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
   },
   appName: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: (2, 2, 2, 2),
+    marginBottom: 30,
     fontWeight: 700,
-    fontSize: 20,
+    fontSize: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    color: '#211B1F',
+  },
+  logoContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  efccText: {
+    color: '#D73539',
   },
 }));
 
@@ -142,7 +159,15 @@ const LoginPage = () => {
         )}
       </div>
       <div className={classes.container}>
-        <span className={classes.appName}> EFCC TELEMATICS CORE</span>
+        <div className={classes.logoContainer}>
+          <img src={logo} width="50px" height="50px" alt="EFCC Logo" />
+          <span className={classes.appName}>
+            <span className={classes.efccText}>
+              EFCC
+            </span>
+            TELEMATICS CORE
+          </span>
+        </div>
         <TextField
           required
           error={failed}
