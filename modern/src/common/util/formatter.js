@@ -35,7 +35,7 @@ export const formatTime = (value, format, hours12) => {
 };
 
 export const formatStatus = (value, t) => t(prefixString('deviceStatus', value));
-export const formatAlarm = (value, t) => (value ? t(prefixString('alarm', value)) : '');
+export const formatAlarm = (value, t) => (value ? t(prefixString('alarm', value)) || value : '');
 
 export const formatCourse = (value) => {
   const courseValues = ['\u2191', '\u2197', '\u2192', '\u2198', '\u2193', '\u2199', '\u2190', '\u2196'];
@@ -103,6 +103,17 @@ export const getStatusColor = (status) => {
   }
 };
 
+export const getEngineStatusColor = (status) => {
+  switch (status) {
+    case 'Moving':
+      return 'green';
+    case 'Engine Off':
+      return 'red';
+    case 'Engine Idle':
+    default:
+      return 'orange';
+  }
+};
 export const getBatteryStatus = (batteryLevel) => {
   if (batteryLevel >= 70) {
     return 'positive';

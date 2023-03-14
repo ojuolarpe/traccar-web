@@ -7,7 +7,6 @@ import PauseCircleFilledIcon from '@mui/icons-material/PauseCircleFilled';
 import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
 import NotificationsActiveIcon from '@mui/icons-material/NotificationsActive';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import RouteIcon from '@mui/icons-material/Route';
 import EventRepeatIcon from '@mui/icons-material/EventRepeat';
@@ -64,12 +63,12 @@ const ReportsMenu = () => {
           icon={<FormatListBulletedIcon />}
           selected={location.pathname === '/reports/summary'}
         />
-        <MenuItem
+        {/* <MenuItem
           title={t('reportChart')}
           link="/reports/chart"
           icon={<TrendingUpIcon />}
           selected={location.pathname === '/reports/chart'}
-        />
+        /> */}
         <MenuItem
           title={t('reportReplay')}
           link="/replay"

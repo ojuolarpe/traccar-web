@@ -9,8 +9,8 @@ import DeviceStatusChart from './components/DeviceStatusChart';
 import DashboardMenu from './components/DashboardMenu';
 
 const DashboardPage = () => {
-  const devices = Object.values(useSelector((state) => state.devices.items));
-  const positions = Object.values(useSelector((state) => state.session.positions));
+  const device = useSelector((state) => state.devices.items);
+  const position = useSelector((state) => state.session.positions);
   const [movingCount, setMovingCount] = React.useState(0);
   const [idleCount, setIdleCount] = React.useState(0);
   const [stoppedCount, setStoppedCount] = React.useState(0);
@@ -23,12 +23,14 @@ const DashboardPage = () => {
   const getIgnitionValue = (position) => (position.attributes && position.attributes.ignition ? position.attributes.ignition : false);
 
   React.useEffect(() => {
+    const positions = Object.values(position);
     setMovingCount(positions ? positions.filter((position) => getMotionValue(position)).length : 0);
     setIdleCount(positions ? positions.filter((position) => (getIgnitionValue(position) && !getMotionValue(position))).length : 0);
     setStoppedCount(positions ? positions.filter((position) => (!getIgnitionValue(position) && !getMotionValue(position))).length : 0);
-  }, [positions]);
+  }, [position]);
 
   React.useEffect(() => {
+    const devices = Object.values(device);
     const totalDevice = devices ? devices.length : 0;
     const totalOffline = devices ? devices.filter((device) => device.status === 'offline').length : 0;
     const totalOnline = devices ? devices.filter((device) => device.status === 'online').length : 0;
@@ -37,11 +39,11 @@ const DashboardPage = () => {
     setInactiveCount(totalUnknown);
     setNeverActiveCount(devices ? devices.filter((device) => device.lastUpdate === null).length : 0);
     setDeviceStatusPieChartData([{ name: 'Online', value: ((totalOnline) / totalDevice) * 100, count: totalOnline }, { name: 'Inactive', value: ((totalUnknown) / totalDevice) * 100, count: totalUnknown }, { name: 'Offline', value: (totalOffline / totalDevice) * 100, count: totalOffline }]);
-  }, [devices]);
+  }, [device]);
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <AppBar component="nav" color="primary">
+      <AppBar component="nav" color="secondary">
         <Toolbar>
           <Typography
             variant="h5"

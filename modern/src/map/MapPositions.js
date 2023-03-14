@@ -85,7 +85,7 @@ const MapPositions = ({ positions, onClick, showStatus, selectedPosition, titleF
         features: [],
       },
       cluster: mapCluster,
-      clusterMaxZoom: 14,
+      clusterMaxZoom: 24,
       clusterRadius: 50,
     });
     map.addLayer({

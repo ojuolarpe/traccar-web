@@ -71,6 +71,7 @@ const DeviceStatusChart = (props) => {
             xs={12}
             lg={12}
             item
+            key={data.name}
           >
             <StatisticsCard title={data.name} value={data.count} percent={data.value} sx={{ height: '100%' }} icon={<DriveEtaIcon />} backgroundColor={BGCOLORS[index % BGCOLORS.length]} />
           </Grid>

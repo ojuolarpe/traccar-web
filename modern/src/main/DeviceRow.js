@@ -14,7 +14,7 @@ import ErrorIcon from '@mui/icons-material/Error';
 import moment from 'moment';
 import { devicesActions } from '../store';
 import {
-  formatAlarm, formatBoolean, formatPercentage, formatStatus, getStatusColor,
+  formatAlarm, formatBoolean, formatPercentage, formatStatus, getStatusColor, getEngineStatusColor,
 } from '../common/util/formatter';
 import { useTranslation } from '../common/components/LocalizationProvider';
 import { mapIconKey, mapIcons } from '../map/core/preloadImages';
@@ -52,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: '50%',
     display: 'inline-block',
     padding: '3px',
+    margin: '3px',
     border: '0.5px solid silver',
   },
   avatarList: {
@@ -121,8 +122,10 @@ const DeviceRow = ({ data, index, style }) => {
         />
         {position && (
           <>
-            {position.attributes.hasOwnProperty('color') && (
-              <span className={classes.dot} style={{ backgroundColor: position.attributes.color }} title={position.attributes.hasOwnProperty('status') ? position.attributes.status : 'Device Color'} />
+            {position.attributes.hasOwnProperty('status') && (
+              <Tooltip title={position.attributes.status}>
+                <span className={classes.dot} style={{ backgroundColor: getEngineStatusColor(position.attributes.status) }} />
+              </Tooltip>
             )}
             {position.attributes.hasOwnProperty('alarm') && (
               <Tooltip title={`${t('eventAlarm')}: ${formatAlarm(position.attributes.alarm, t)}`}>
