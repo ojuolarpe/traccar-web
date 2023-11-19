@@ -20,7 +20,7 @@ const MapSelectedDevice = () => {
       map.easeTo({
         center: [position.longitude, position.latitude],
         zoom: Math.max(map.getZoom(), selectZoom),
-        offset: [0, -dimensions.popupMapOffset / 2],
+        offset: [5, -dimensions.popupMapOffset / 2],
       });
     }
   });

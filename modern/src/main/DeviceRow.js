@@ -61,14 +61,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const DeviceRow = ({ data, index, style }) => {
+const DeviceRow = ({ item, style }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const t = useTranslation();
-
   const admin = useAdministrator();
 
-  const item = data[index];
+  // const item = data[index];
   const position = useSelector((state) => state.session.positions[item.id]);
 
   const geofences = useSelector((state) => state.geofences.items);

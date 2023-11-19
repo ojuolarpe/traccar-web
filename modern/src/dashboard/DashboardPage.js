@@ -38,7 +38,7 @@ const DashboardPage = () => {
     setOfflineCount(totalOffline);
     setInactiveCount(totalUnknown);
     setNeverActiveCount(devices ? devices.filter((device) => device.lastUpdate === null).length : 0);
-    setDeviceStatusPieChartData([{ name: 'Online', value: ((totalOnline) / totalDevice) * 100, count: totalOnline }, { name: 'Inactive', value: ((totalUnknown) / totalDevice) * 100, count: totalUnknown }, { name: 'Offline', value: (totalOffline / totalDevice) * 100, count: totalOffline }]);
+    setDeviceStatusPieChartData([{ name: 'Online', value: Math.round((totalOnline / totalDevice) * 100), count: totalOnline }, { name: 'Inactive', value: Math.round((totalUnknown / totalDevice) * 100), count: totalUnknown }, { name: 'Offline', value: Math.round((totalOffline / totalDevice) * 100), count: totalOffline }]);
   }, [device]);
 
   return (

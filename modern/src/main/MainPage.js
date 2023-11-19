@@ -74,6 +74,8 @@ const MainPage = () => {
 
   const selectedDeviceId = useSelector((state) => state.devices.selectedId);
   const positions = useSelector((state) => state.session.positions);
+  const groups = useSelector((state) => state.groups.items);
+
   const [filteredPositions, setFilteredPositions] = useState([]);
   const selectedPosition = filteredPositions.find((position) => selectedDeviceId && position.deviceId === selectedDeviceId);
 
@@ -136,7 +138,7 @@ const MainPage = () => {
             </div>
           )}
           <Paper square className={classes.contentList} style={devicesOpen ? {} : { visibility: 'hidden' }}>
-            <DeviceList devices={filteredDevices} />
+            <DeviceList devices={filteredDevices} groups={groups} />
           </Paper>
         </div>
         {desktop && (
