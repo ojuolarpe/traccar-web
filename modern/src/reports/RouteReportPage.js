@@ -47,7 +47,7 @@ const RouteReportPage = () => {
     const query = new URLSearchParams({ from, to });
     deviceIds.forEach((deviceId) => query.append('deviceId', deviceId));
     if (type === 'export') {
-      window.location.assign(`/api/reports/route/xlsx?${query.toString()}`);
+      window.open(`/api/reports/route/xlsx?${query.toString()}`, '_blank', 'noreferrer');
     } else if (type === 'mail') {
       const response = await fetch(`/api/reports/route/mail?${query.toString()}`);
       if (!response.ok) {
