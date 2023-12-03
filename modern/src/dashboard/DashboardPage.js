@@ -4,6 +4,7 @@ import {
   Box, Container, Unstable_Grid2 as Grid, Typography, Divider, AppBar, Toolbar,
 } from '@mui/material';
 import DirectionsCarFilledTwoToneIcon from '@mui/icons-material/DirectionsCarFilledTwoTone';
+import groupBy from 'lodash/groupBy';
 import StatisticsCard from './components/StatisticsCard';
 import DeviceStatusChart from './components/DeviceStatusChart';
 import DashboardMenu from './components/DashboardMenu';
@@ -32,9 +33,10 @@ const DashboardPage = () => {
   React.useEffect(() => {
     const devices = Object.values(device);
     const totalDevice = devices ? devices.length : 0;
-    const totalOffline = devices ? devices.filter((device) => device.status === 'offline').length : 0;
-    const totalOnline = devices ? devices.filter((device) => device.status === 'online').length : 0;
-    const totalUnknown = devices ? devices.filter((device) => device.status === 'unknown').length : 0;
+    const groupedDevices = groupBy(devices, (device) => device.status);
+    const totalOffline = groupedDevices.offline ? groupedDevices.offline.length : 0;
+    const totalOnline = groupedDevices.online ? groupedDevices.online.length : 0;
+    const totalUnknown = groupedDevices.unknown ? groupedDevices.unknown.length : 0;
     setOfflineCount(totalOffline);
     setInactiveCount(totalUnknown);
     setNeverActiveCount(devices ? devices.filter((device) => device.lastUpdate === null).length : 0);

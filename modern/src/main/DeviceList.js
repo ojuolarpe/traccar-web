@@ -8,6 +8,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
+import groupBy from 'lodash/groupBy';
 import DeviceRow from './DeviceRow';
 import { devicesActions } from '../store';
 import { useEffectAsync } from '../reactHelper';
@@ -76,7 +77,7 @@ const DeviceList = ({ devices, groups }) => {
   };
 
   useEffect(() => {
-    const groupDeviceObj = Object.groupBy(devices, (device) => device.groupId);
+    const groupDeviceObj = groupBy(devices, (device) => device.groupId);
 
     const groupedDeviceArray = [];
     Object.keys(groupDeviceObj).forEach((groupId) => {

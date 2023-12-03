@@ -11,9 +11,10 @@ import PersonIcon from '@mui/icons-material/Person';
 
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import SmartphoneIcon from '@mui/icons-material/Smartphone';
 import { useTranslation } from '../../common/components/LocalizationProvider';
 import {
-  useRestriction,
+  useRestriction, useDeviceReadonly,
 } from '../../common/util/permissions';
 import { nativePostMessage } from '../../common/components/NativeInterface';
 import { sessionActions } from '../../store';
@@ -33,6 +34,7 @@ const DashboardMenu = () => {
   const dispatch = useDispatch();
   const readonly = useRestriction('readonly');
 
+  const deviceReadonly = useDeviceReadonly();
   const disableReports = useRestriction('disableReports');
   const socket = useSelector((state) => state.session.socket);
   const user = useSelector((state) => state.session.user);
@@ -77,6 +79,14 @@ const DashboardMenu = () => {
         invisible={socket !== false}
         selected={location.pathname === '/'}
       />
+      {!deviceReadonly && (
+      <MenuItem
+        title={t('deviceTitle')}
+        link="/settings/devices"
+        icon={<SmartphoneIcon />}
+        selected={location.pathname.startsWith('/settings/device')}
+      />
+      )}
       {!disableReports && (
         <MenuItem
           title={t('reportTitle')}
